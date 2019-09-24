@@ -12,7 +12,7 @@ class App extends React.Component {
 
   componentDidMount() {
     superagent
-      .get('http://localhost:4000/api/v1/StarterCharacters')
+      .get('https://fe-api.herokuapp.com/api/v1/StarterCharacters')
       .then(results => {
         this.setState({ characters: results.body });
         this.state.characters.forEach(character => {
@@ -22,7 +22,7 @@ class App extends React.Component {
       })
       .catch(e => alert("Couldn't retrieve data"));
     superagent
-      .get('http://localhost:4000/api/v1/enemies')
+      .get('https://fe-api.herokuapp.com/api/v1/enemies')
       .then(results => {
         this.setState({ enemies: results.body });
       })
