@@ -11,8 +11,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    let url = process.env.PORT
+      ? 'https://fe-api.herokuapp.com/api/v1/StarterCharacters'
+      : 'http://localhost:4000/api/v1/StarterCharacters';
     superagent
-      .get('https://fe-api.herokuapp.com/api/v1/StarterCharacters')
+      .get(url)
       .then(results => {
         this.setState({ characters: results.body });
         this.state.characters.forEach(character => {
@@ -21,8 +24,11 @@ class App extends React.Component {
         this.setState({ characters: this.state.characters });
       })
       .catch(e => alert("Couldn't retrieve data"));
+    url = process.env.PORT
+      ? 'https://fe-api.herokuapp.com/api/v1/enemies'
+      : 'http://localhost:4000/api/v1/enemies';
     superagent
-      .get('https://fe-api.herokuapp.com/api/v1/enemies')
+      .get(url)
       .then(results => {
         this.setState({ enemies: results.body });
       })
