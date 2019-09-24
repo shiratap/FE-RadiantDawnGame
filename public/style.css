@@ -1,26 +1,112 @@
 body {
-  background-color: #eeee;
+  background-image: linear-gradient(
+    rgba(255, 235, 10, 0.2),
+    rgba(255, 214, 170, 0.933)
+  );
 }
 
 .container {
   background-color: white;
+  margin: 1% 1% 1% 1%;
+  max-width: 98%;
+  padding: 0px 0px 0px 0px;
+}
+.row {
+  margin: 0px;
+  max-width: 100%;
+}
+.col-sm-6 {
+  max-width: 100%;
+  padding: 0px 0px 0px 0px;
+}
+.col-sm-3 {
+  max-width: 100%;
+  padding: 0px 0px 0px 0px;
 }
 
 .character {
-  padding: 20px;
+  margin: 10px 0px 10px 10px;
 }
 h3 {
+  margin-left: 10px;
   margin-bottom: 10px;
+  font-family: 'Pacifico', cursive;
+  color: black;
 }
-.heroes {
-  background-image: linear-gradient(#eeee, #ffff);
-  border: solid 10px gold;
+h4 {
+  color: black;
+}
+.heroes,
+.enemies {
   border-radius: 10px;
+  width: 100%;
+}
+.heroes .character {
+  padding: 10px 0px 10px 0px;
+  background-repeat: no-repeat;
+  background-size: 100% 150%;
+  font-weight: bolder;
+  color: rgb(233, 100, 85);
+}
+@media (max-width: 763px) {
+  .heroes .character {
+    background-size: 400px 150%;
+  }
+}
+@media (max-width: 654px) {
+  .heroes .character {
+    background-size: 150% 100%;
+  }
+}
+@media (max-width: 576px) {
+  .heroes .character {
+    background-size: 100% 150%;
+  }
+}
+@media (max-width: 400px) {
+  .heroes .character {
+    background-size: 400px 150%;
+  }
+}
+@media (min-width: 1000px) {
+  .heroes .character {
+    height: 150px;
+    background-size: 100% 200%;
+  }
+  .enemies .character {
+    height: 125px;
+  }
+}
+img {
+  width: 100px;
+  height: 100px;
+}
+#Micaiah {
+  background-image: url('./assets/Micaiah.jpg');
+}
+#Edward {
+  background-image: url('./assets/Edward.jpg');
+}
+#Leonardo {
+  background-image: url('./assets/Leonardo.jpg');
 }
 .enemies :first-child.character {
   padding: 20px;
   border: dotted 2px black;
 }
+
+.enemies > .character {
+  display: none;
+}
+.enemies > .character:nth-child(-n + 5) {
+  display: block;
+  padding: 15px 15px 15px 15px;
+}
+
+button {
+  width: 60px;
+}
 :last-child button {
   margin-left: 5px;
+  margin-top: 5px;
 }

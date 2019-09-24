@@ -25,9 +25,12 @@ module.exports = (index, state) => {
       for (let i = 0; i < statList.length - 1; i++) {
         let stat = Math.round(Math.random());
         x.push(stat);
-        player[`${statList[i]}`] += stat;
-        if (i === 0 && stat === 1) {
+        if (i === 0) {
+          state.characters[index].startingStats.Lvl++;
+        } else if (i === 1 && stat === 1) {
           state.characters[index].maxHP++;
+        } else {
+          player[`${statList[i]}`] += stat;
         }
       }
       let lvlUpStr = `${state.characters[index].name} Leveled Up!\n`;
@@ -61,9 +64,12 @@ module.exports = (index, state) => {
       for (let i = 0; i < statList.length - 1; i++) {
         let stat = Math.round(Math.random());
         x.push(stat);
-        player[`${statList[i]}`] += stat;
-        if (i === 0 && stat === 1) {
+        if (i === 0) {
+          state.characters[index].startingStats.Lvl++;
+        } else if (i === 1 && stat === 1) {
           state.characters[index].maxHP++;
+        } else {
+          player[`${statList[i]}`] += stat;
         }
       }
       let lvlUpStr = `${state.characters[index].name} Leveled Up!\n`;
