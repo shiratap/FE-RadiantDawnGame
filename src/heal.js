@@ -5,13 +5,12 @@ module.exports = (index, state) => {
     return state;
   }
   if (
-    state.characters[index].startingStats.maxHP >
-    state.characters[index].startingStats.hp + 10
+    state.characters[index].maxHP >
+    state.characters[index].startingStats.HP + 10
   ) {
-    state.characters[index].startingStats.hp += 10;
+    state.characters[index].startingStats.HP += 10;
   } else {
-    state.characters[index].startingStats.hp =
-      state.characters[index].startingStats.maxHP;
+    state.characters[index].startingStats.HP = state.characters[index].maxHP;
   }
   state.healing -= 1;
   return state;

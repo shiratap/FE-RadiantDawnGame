@@ -19,7 +19,7 @@ class App extends React.Component {
       .then(results => {
         this.setState({ characters: results.body });
         this.state.characters.forEach(character => {
-          character.startingStats.maxHP = character.startingStats.hp;
+          character.maxHP = character.startingStats.HP;
         });
         this.setState({ characters: this.state.characters });
       })
@@ -37,16 +37,7 @@ class App extends React.Component {
   }
 
   render() {
-    let statList = [
-      'Health',
-      'Attack',
-      'Magic',
-      'Speed',
-      'Luck',
-      'Defence',
-      'Resistance',
-      'Experience'
-    ];
+    let statList = require('./statList.js');
 
     return (
       <div className="container">
