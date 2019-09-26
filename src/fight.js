@@ -1,5 +1,7 @@
 const statList = require('./statList.js');
 module.exports = (index, state) => {
+  state.actionDialog = '';
+  state.levelUpDialog = '';
   let player = state.characters[index].startingStats;
   if (!(state.enemies && state.enemies[0] && state.enemies[0].startingStats)) {
     return state;
@@ -7,7 +9,6 @@ module.exports = (index, state) => {
   let enemy = state.enemies[0].startingStats;
 
   if (enemy.Def > player.Att && enemy.Res > player.Mag) {
-    return;
   } else {
     let Att = checkDifference(player.Att, enemy.Def);
     let Mag = checkDifference(player.Mag, enemy.Res);
@@ -19,7 +20,8 @@ module.exports = (index, state) => {
   }
   if (enemy.HP <= 0) {
     state.enemies.splice(0, 1);
-    player.Exp += 100;
+    state.actionDialog += `${state.enemies[0].name} killed`;
+    player.Exp += 100 - player.Lvl + 1;
     if (player.Exp >= 100) {
       let x = [];
       for (let i = 0; i < statList.length - 1; i++) {
@@ -34,18 +36,19 @@ module.exports = (index, state) => {
         }
       }
       let lvlUpStr = `${state.characters[index].name} Leveled Up!\n`;
-      for (let i = 0; i < statList.length; i++) {
+      for (let i = 1; i < statList.length; i++) {
         if (x[i] === 1) {
           lvlUpStr += `${statList[i]} + 1\n`;
         }
       }
-      alert(lvlUpStr, (player.Exp -= 100));
+      state.levelUpDialog += lvlUpStr;
+      player.Exp -= 100;
     }
     return state;
   }
 
   if (player.Def > enemy.Att && player.Res > enemy.Mag) {
-    return;
+    return state;
   } else {
     let Att = checkDifference(enemy.Att, player.Def);
     let Mag = checkDifference(enemy.Mag, player.Res);
@@ -58,7 +61,8 @@ module.exports = (index, state) => {
   if (player.HP <= 0) {
     state.characters.splice(index, 1);
   } else {
-    player.Exp += 20;
+    player.Exp += 20 - Math.ceil((player.Lvl - 1) / 3);
+    console.log(Math.ceil((player.Lvl - 1) / 3));
     if (player.Exp >= 100) {
       let x = [];
       for (let i = 0; i < statList.length - 1; i++) {
@@ -73,12 +77,13 @@ module.exports = (index, state) => {
         }
       }
       let lvlUpStr = `${state.characters[index].name} Leveled Up!\n`;
-      for (let i = 0; i < statList.length; i++) {
+      for (let i = 1; i < statList.length; i++) {
         if (x[i] === 1) {
           lvlUpStr += `${statList[i]} + 1\n`;
         }
       }
-      alert(lvlUpStr, (player.Exp -= 100));
+      state.levelUpDialog += lvlUpStr;
+      player.Exp -= 100;
     }
   }
 

@@ -13,6 +13,7 @@ class App extends React.Component {
 
   componentDidMount() {
     let url = 'https://fe-api.herokuapp.com/api/v1/StarterCharacters';
+    // let url = 'http://localhost:4000/api/v1/StarterCharacters';
     superagent
       .get(url)
       .then(results => {
@@ -21,14 +22,16 @@ class App extends React.Component {
           character.maxHP = character.startingStats.HP;
         });
         this.setState({ characters: this.state.characters });
+        this.setState({ actionDialog: '' });
       })
       .catch(e => alert("Couldn't retrieve data"));
     url = 'https://fe-api.herokuapp.com/api/v1/enemies';
+    // url = 'http://localhost:4000/api/v1/enemies';
     superagent
       .get(url)
       .then(results => {
         for (var i = 1; i < 4; i++) {
-          let level = i <= 1 ? 5 : i === 2 ? 30 : i === 3 ? 50 : 60;
+          let level = i <= 1 ? 5 : i === 2 ? 20 : i === 3 ? 40 : 50;
           results.body.forEach(enemy => {
             let buffedEnemy = JSON.parse(JSON.stringify(enemy));
             for (let y = 0; y < statList.length - 1; y++) {
@@ -113,12 +116,26 @@ class App extends React.Component {
                 })}
               <div className="character">
                 <div className="row">
-                  <div className="col-sm-7">
+                  <div className="col-sm-3">
                     <h4>Herbs: {this.state.healing}</h4>
                     Heal 10hp
                   </div>
                   <div className="col-sm-3">
                     <img src="./assets/herb.jpg" />
+                  </div>
+                  <div className="col-sm-6 actionLogs">
+                    <div className="row ">
+                      <div className="col-sm-6">
+                        <h4>Action Log:</h4>
+                        {this.state.actionDialog}
+                      </div>
+                      <div className="col-sm-6">
+                        {this.state.levelUpDialog &&
+                          this.state.levelUpDialog.split('\n').map(str => {
+                            return <div>{str}</div>;
+                          })}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
